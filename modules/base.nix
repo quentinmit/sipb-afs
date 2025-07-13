@@ -26,5 +26,9 @@ in {
       enable = true;
       cellName = "sipb.mit.edu";
     };
+    # Trust ATHENA.MIT.EDU as a local realm.
+    environment.etc."openafs/server/krb.conf".text = ''
+      ATHENA.MIT.EDU
+    '';
   };
 }

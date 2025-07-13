@@ -1,6 +1,8 @@
 {
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-25.05";
+    # https://github.com/NixOS/nixpkgs/pull/424753
+    #nixpkgs.url = "nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:quentinmit/nixpkgs/openafs-cellservdb";
     flake-utils.url = "github:numtide/flake-utils";
   };
   outputs = { self, nixpkgs, flake-utils, ... }@args:

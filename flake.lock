@@ -20,17 +20,18 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1751943650,
-        "narHash": "sha256-7orTnNqkGGru8Je6Un6mq1T8YVVU/O5kyW4+f9C1mZQ=",
-        "owner": "NixOS",
+        "lastModified": 1752391373,
+        "narHash": "sha256-xC+yIHF+hMDheK02jIH10xxe7pSi6tmCOvDdNtDLR7A=",
+        "owner": "quentinmit",
         "repo": "nixpkgs",
-        "rev": "88983d4b665fb491861005137ce2b11a9f89f203",
+        "rev": "766e69da65a267eeb02da73be2506348bd736018",
         "type": "github"
       },
       "original": {
-        "id": "nixpkgs",
-        "ref": "nixos-25.05",
-        "type": "indirect"
+        "owner": "quentinmit",
+        "ref": "openafs-cellservdb",
+        "repo": "nixpkgs",
+        "type": "github"
       }
     },
     "root": {
