@@ -28,11 +28,17 @@
       findModules' = path: builtins.listToAttrs (findModules path);
       in {
         nixosModules = findModules' ./modules;
+        overlays.default = import ./pkgs/overlays.nix;
       } // (flake-utils.lib.eachDefaultSystem (system:
         let
           inherit ((
             import nixpkgs {
               inherit system;
+              overlays = [
+                self.overlays.default
+              ];
+              # TSM is unfree
+              config.allowUnfree = true;
             }
           )) pkgs;
           inherit (pkgs) lib;
