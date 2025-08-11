@@ -4,6 +4,8 @@
     # https://github.com/NixOS/nixpkgs/pull/424753
     #nixpkgs.url = "nixpkgs/nixos-25.05";
     nixpkgs.url = "github:quentinmit/nixpkgs/openafs-cellservdb";
+    disko.url = "github:nix-community/disko";
+    disko.inputs.nixpkgs.follows = "nixpkgs";
   };
   # `outputs` is a function that takes the resolved dependencies as arguments
   # and returns the flake's products.
@@ -25,14 +27,25 @@
       # TSM is unfree
       config.allowUnfree = true;
     };
+    packages.x86_64-linux.nixosTests = {
     # The package nixosTests.cell is a self-contained test that spawns two AFS
     # servers and exercises the cell.
-    packages.x86_64-linux.nixosTests.cell = self.legacyPackages.x86_64-linux.testers.runNixOSTest {
-      imports = [
-        ./tests/cell.nix
-      ];
-      # Add all local NixOS modules
-      defaults.imports = builtins.attrValues self.nixosModules;
+      cell = self.legacyPackages.x86_64-linux.testers.runNixOSTest {
+        imports = [
+          ./tests/cell.nix
+        ];
+        # Add all local NixOS modules
+        defaults.imports = builtins.attrValues self.nixosModules;
+      };
+      # nixosTests.cell-zfs uses ZFS for vicepa.
+      cell-zfs = self.legacyPackages.x86_64-linux.testers.runNixOSTest {
+        _module.args.self = self;
+        imports = [
+          ./tests/cell-zfs.nix
+        ];
+        # Add all local NixOS modules
+        defaults.imports = builtins.attrValues self.nixosModules;
+      };
     };
     # This was the name the test was previously exposed under; this is just an alias for the new name.
     nixosTests.x86_64-linux.cell = self.packages.x86_64-linux.nixosTests.cell;

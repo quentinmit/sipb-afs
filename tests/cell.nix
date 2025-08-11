@@ -65,6 +65,7 @@
       kvno = m.group(1)
       return kvno
     def setup_afs_daemons(machine, kvno):
+      machine.wait_for_unit("local-fs.target")
       machine.succeed(
         "mkdir -p /vicepa",
         "touch /vicepa/AlwaysAttach",
