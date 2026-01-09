@@ -1,9 +1,9 @@
 {
   # `inputs` specifies Nix language dependencies for this flake
   inputs = {
-    # https://github.com/NixOS/nixpkgs/pull/424753
-    #nixpkgs.url = "nixpkgs/nixos-25.05";
-    nixpkgs.url = "github:quentinmit/nixpkgs/openafs-cellservdb";
+    # nixos-unstable has https://github.com/NixOS/nixpkgs/pull/424753
+    # This should ship as part of 26.05, although we could also pull it in early with a local patch.
+    nixpkgs.url = "nixpkgs/nixos-unstable";
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
   };
